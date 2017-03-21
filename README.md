@@ -1,5 +1,5 @@
 
-C++11 Blowfish-Cipher class easy to use and understand your project!
+C++11 Blowfish-Cipher class easy to use.
 
 ## Usage
 
