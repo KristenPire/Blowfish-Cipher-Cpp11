@@ -17,7 +17,7 @@ private:
 
 public:
   Blowfish(const std::string &);
-  virtual ~Blowfish();
+  ~Blowfish();
 
 private:
   Blowfish(const Blowfish &){}
