@@ -83,7 +83,7 @@ std::string					Blowfish::Decrypt(const std::string& entry)
 	token.clear();
       }
   });
-  if ((blocks.size() % 2) != 0)
+  if (blocks.size() & 1) // If the number is even
     std::cerr << "Input truncated" << std::endl;
   for (padCounter = 0; padCounter < blocks.size(); padCounter += 2)
     {
@@ -114,44 +114,42 @@ unsigned long	Blowfish::Round(unsigned long x) noexcept
   return ret;
 }
 
-void		Blowfish::Encrypt(unsigned long &left, unsigned long &rigth) noexcept
+void		Blowfish::Encrypt(unsigned long &left, unsigned long &right) noexcept
 {
   unsigned	counter;
 
   for (counter = 0; counter < 16; ++counter)
     {
       left = left ^ _P[counter];
-      rigth = this->Round(left) ^ rigth;
-      std::swap(left, rigth);
+      right = this->Round(left) ^ right;
+      std::swap(left, right);
     }
-  std::swap(left, rigth);
-  rigth = rigth ^ _P[16];
+  std::swap(left, right);
+  right = right ^ _P[16];
   left = left ^_P[17];
 }
 
-void		Blowfish::Decrypt(unsigned long &left, unsigned long &rigth) noexcept
+void		Blowfish::Decrypt(unsigned long &left, unsigned long &right) noexcept
 {
   unsigned	counter;
 
   for (counter = 17; counter > 1; --counter)
     {
       left = left ^ _P[counter];
-      rigth = this->Round(left) ^ rigth;
-      std::swap(left, rigth);
+      right = this->Round(left) ^ right;
+      std::swap(left, right);
     }
-  std::swap(left, rigth);
-  rigth = rigth ^_P[1];
+  std::swap(left, right);
+  right = right ^_P[1];
   left = left ^ _P[0];
 }
 
 void		Blowfish::EncryptPS() noexcept
 {
   unsigned	i;
-  unsigned long	left;
-  unsigned long right;
+  unsigned long	left = 0x00000000;
+  unsigned long right = 0x00000000;
 
-  left = 0x00000000;
-  right = 0x00000000;
   for (i = 0; i < 18; i += 2)
     {
       this->Encrypt(left, right);
