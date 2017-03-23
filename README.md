@@ -1,8 +1,5 @@
-<snippet>
-  <content><![CDATA[
-  # ${1:Project Name}
 
-C++11 Blowfish-Cipher class easy to use and understand your project!
+C++11 Blowfish-Cipher class easy to use.
 
 ## Usage
 
@@ -17,6 +14,3 @@ C++11 Blowfish-Cipher class easy to use and understand your project!
 4. Push to the branch: `git push origin my-new-feature`
 5. Submit a pull request :D
 
-]]></content>
-  <tabTrigger>readme</tabTrigger>
-  </snippet>
